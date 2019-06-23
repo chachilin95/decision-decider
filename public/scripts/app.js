@@ -49,9 +49,15 @@ var render = function render() {
             app.options.length > 0 ? "Here are your options" : "No options"
         ),
         React.createElement(
-            "p",
+            "ol",
             null,
-            app.options.length
+            app.options.map(function (option, index) {
+                return React.createElement(
+                    "li",
+                    { key: index },
+                    option
+                );
+            })
         ),
         React.createElement(
             "button",
