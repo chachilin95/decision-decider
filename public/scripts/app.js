@@ -1,83 +1,40 @@
-"use strict";
+'use strict';
 
-console.log("App.js is running");
-
-var app = {
-    title: "Indecision App",
-    subtitle: "First App of the Course",
-    options: ['One', 'Two']
+// arguments object - no longer bound with arrow functions
+var add = function add(a, b) {
+    return a + b;
 };
-var template = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        "p",
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        "p",
-        null,
-        " ",
-        app.options.length > 0 ? "Here are your options" : "No options"
-    ),
-    React.createElement(
-        "ol",
-        null,
-        React.createElement(
-            "li",
-            null,
-            "Item one"
-        ),
-        React.createElement(
-            "li",
-            null,
-            "Item two"
-        )
-    )
-);
+
+console.log(add(55, 1));
+
+// this keyword - no longer bound
 
 var user = {
-    name: "afigueroa",
-    age: 99,
-    location: "Dallas, TX"
-};
+    name: 'Alex',
+    cities: ['Dallas', 'Wilmington', 'Orlando'],
+    printPlacesLived: function printPlacesLived() {
+        var _this = this;
 
-function getLocation(location) {
-    if (location) {
-        return location;
-    } else {
-        return "Unknown";
+        var cityMessages = this.cities.map(function (city) {
+            return _this.name + ' has lived in ' + city;
+        });
+
+        return cityMessages;
     }
-}
+};
+console.log(user.printPlacesLived());
 
-var template2 = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        user.name
-    ),
-    React.createElement(
-        "p",
-        null,
-        "Age: ",
-        user.age
-    ),
-    React.createElement(
-        "p",
-        null,
-        "Location: ",
-        getLocation(user.location)
-    )
-);
+// Challenge
 
-var appRoot = document.getElementById('app');
+var multiplier = {
+    numbers: [2, 4, 6, 8],
+    multiplyBy: 2,
+    multiply: function multiply() {
+        var _this2 = this;
 
-ReactDOM.render(template, appRoot);
+        return this.numbers.map(function (num) {
+            return num * _this2.multiplyBy;
+        });
+    }
+};
+console.log(multiplier.multiply());
