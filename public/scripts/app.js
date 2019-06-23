@@ -1,40 +1,90 @@
-'use strict';
+"use strict";
 
-// arguments object - no longer bound with arrow functions
-var add = function add(a, b) {
-    return a + b;
+console.log("App.js is running");
+
+var app = {
+    title: "Indecision App",
+    subtitle: "First App of the Course",
+    options: ['One', 'Two']
+};
+var template = React.createElement(
+    "div",
+    null,
+    React.createElement(
+        "h1",
+        null,
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        "p",
+        null,
+        app.subtitle
+    ),
+    React.createElement(
+        "p",
+        null,
+        " ",
+        app.options.length > 0 ? "Here are your options" : "No options"
+    ),
+    React.createElement(
+        "ol",
+        null,
+        React.createElement(
+            "li",
+            null,
+            "Item one"
+        ),
+        React.createElement(
+            "li",
+            null,
+            "Item two"
+        )
+    )
+);
+
+var count = 0;
+var increment = function increment() {
+    count++;
+    renderCounterApp();
+};
+var decrement = function decrement() {
+    count--;
+    renderCounterApp();
+};
+var reset = function reset() {
+    count = 0;
+    renderCounterApp();
 };
 
-console.log(add(55, 1));
+var appRoot = document.getElementById('app');
 
-// this keyword - no longer bound
+var renderCounterApp = function renderCounterApp() {
+    var templateTwo = React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "h1",
+            null,
+            "Count: ",
+            count
+        ),
+        React.createElement(
+            "button",
+            { onClick: increment },
+            "+1"
+        ),
+        React.createElement(
+            "button",
+            { onClick: decrement },
+            "-1"
+        ),
+        React.createElement(
+            "button",
+            { onClick: reset },
+            "Reset"
+        )
+    );
 
-var user = {
-    name: 'Alex',
-    cities: ['Dallas', 'Wilmington', 'Orlando'],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
-
-        var cityMessages = this.cities.map(function (city) {
-            return _this.name + ' has lived in ' + city;
-        });
-
-        return cityMessages;
-    }
+    ReactDOM.render(templateTwo, appRoot);
 };
-console.log(user.printPlacesLived());
-
-// Challenge
-
-var multiplier = {
-    numbers: [2, 4, 6, 8],
-    multiplyBy: 2,
-    multiply: function multiply() {
-        var _this2 = this;
-
-        return this.numbers.map(function (num) {
-            return num * _this2.multiplyBy;
-        });
-    }
-};
-console.log(multiplier.multiply());
+renderCounterApp();

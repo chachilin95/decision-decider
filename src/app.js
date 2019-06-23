@@ -15,31 +15,34 @@ var template = (
             <li>Item two</li>
         </ol>
     </div>
-);
+); 
 
-var user = {
-    name: "afigueroa",
-    age: 99,
-    location: "Dallas, TX"
+let count = 0
+const increment = () => {
+    count++;
+    renderCounterApp();
+}
+const decrement = () => {
+    count--;
+    renderCounterApp();
+}
+const reset = () => {
+    count = 0
+    renderCounterApp();
 }
 
-function getLocation(location) {
-    if (location) {
-        return location;
-    } else {
-        return "Unknown";
-    }
+const appRoot = document.getElementById('app');
+
+const renderCounterApp = () => {
+    const templateTwo = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={increment}>+1</button>
+            <button onClick={decrement}>-1</button>
+            <button onClick={reset}>Reset</button>
+        </div>
+    );
+
+    ReactDOM.render(templateTwo, appRoot);
 }
-
-var template2 = (
-    <div>
-        <h1>{user.name}</h1>
-        <p>Age: {user.age}</p>
-        <p>Location: {getLocation(user.location)}</p>
-    </div>
-);
-
-
-var appRoot = document.getElementById('app');
-
-ReactDOM.render(template, appRoot);
+renderCounterApp();
