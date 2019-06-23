@@ -73,15 +73,18 @@ var Header = function (_React$Component2) {
 var Action = function (_React$Component3) {
     _inherits(Action, _React$Component3);
 
-    function Action() {
+    function Action(props) {
         _classCallCheck(this, Action);
 
-        return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
+        var _this3 = _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).call(this, props));
+
+        _this3.handlePick = _this3.handlePick.bind(_this3);
+        return _this3;
     }
 
     _createClass(Action, [{
-        key: "execute",
-        value: function execute() {
+        key: "handlePick",
+        value: function handlePick() {
             alert('executing');
         }
     }, {
@@ -92,7 +95,7 @@ var Action = function (_React$Component3) {
                 null,
                 React.createElement(
                     "button",
-                    { onClick: this.execute },
+                    { onClick: this.handlePick },
                     "What Should I Do?"
                 )
             );
@@ -105,16 +108,19 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+        return _this4;
     }
 
     _createClass(Options, [{
-        key: "removeAll",
-        value: function removeAll() {
-            alert('removeAll');
+        key: "handleRemoveAll",
+        value: function handleRemoveAll() {
+            console.log(this.props.options);
         }
     }, {
         key: "renderList",
@@ -127,7 +133,7 @@ var Options = function (_React$Component4) {
                     null,
                     React.createElement(
                         "button",
-                        { onClick: this.removeAll },
+                        { onClick: this.handleRemoveAll },
                         "Remove All"
                     ),
                     options.map(function (option) {
@@ -176,10 +182,13 @@ var Option = function (_React$Component5) {
 var AddOption = function (_React$Component6) {
     _inherits(AddOption, _React$Component6);
 
-    function AddOption() {
+    function AddOption(props) {
         _classCallCheck(this, AddOption);
 
-        return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+        _this6.handleOnSubmit = _this6.handleOnSubmit.bind(_this6);
+        return _this6;
     }
 
     _createClass(AddOption, [{

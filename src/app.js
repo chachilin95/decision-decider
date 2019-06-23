@@ -27,15 +27,21 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.handlePick = this.handlePick.bind(this)
+    }
     
-    execute() {
+    handlePick() {
         alert('executing');
     }
     
     render() {
         return (
             <div>
-                <button onClick={this.execute}>What Should I Do?</button>
+                <button onClick={this.handlePick}>What Should I Do?</button>
             </div>
         );
     }
@@ -43,8 +49,14 @@ class Action extends React.Component {
 
 class Options extends React.Component {
 
-    removeAll() {
-        alert('removeAll');
+    constructor(props) {
+        super(props);
+
+        this.handleRemoveAll = this.handleRemoveAll.bind(this)
+    }
+
+    handleRemoveAll() {
+        console.log(this.props.options)
     }
 
     renderList() {
@@ -53,7 +65,7 @@ class Options extends React.Component {
         if (options.length > 0) {
             return (
                 <div>                    
-                    <button onClick={this.removeAll}>Remove All</button>
+                    <button onClick={this.handleRemoveAll}>Remove All</button>
                     {options.map((option) => <Option key={option} optionText={option}/>)}
                 </div>
             );
@@ -80,6 +92,12 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.handleOnSubmit = this.handleOnSubmit.bind(this)
+    }
     
     handleOnSubmit(e) {
         e.preventDefault();
