@@ -3,11 +3,12 @@ class IndecisionApp extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         this.handlePick = this.handlePick.bind(this);
-
+        this.handleAddOption = this.handleAddOption.bind(this);
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+        
         this.state = {
-            options: ['thing one', 'thing two', 'thing three']
+            options: []
         };
     }
 
@@ -25,6 +26,21 @@ class IndecisionApp extends React.Component {
         alert(option);
     }
 
+    handleAddOption(option) {
+
+        if (!option) {
+            return 'Enter valid value to add item';
+        } else if (this.state.options.indexOf(option) > -1) {
+            return 'This option already exists';
+        }
+
+        this.setState((prev) => {
+            return {
+                options: prev.options.concat(option)
+            }
+        });
+    }
+
     render() {
         const title = "Indecision App";
         const subtitle = "Become One With the Computer";
@@ -38,7 +54,8 @@ class IndecisionApp extends React.Component {
                 <Options 
                     options={this.state.options}
                     handleDeleteOptions={this.handleDeleteOptions}/>
-                <AddOption />
+                <AddOption 
+                    handleAddOption={this.handleAddOption}/>
             </div>
         );
     }
@@ -95,22 +112,28 @@ class AddOption extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleOnSubmit = this.handleOnSubmit.bind(this)
+        this.handleOnSubmit = this.handleOnSubmit.bind(this);
+
+        this.state = {
+            error: undefined
+        };
     }
     
     handleOnSubmit(e) {
         e.preventDefault();
 
-        const option = e.target.elements.optionText.value.trim()
-        
-        if (option) {
-            alert(option);
-        }
+        const option = e.target.elements.optionText.value.trim();
+        const error = this.props.handleAddOption(option);
+
+        this.setState(() => {
+            return { error };
+        })
     }
     
     render() {
         return (
             <div>
+                {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.handleOnSubmit}>
                     <input type='text' name='optionText'/>
                     <button>Add Option</button>
