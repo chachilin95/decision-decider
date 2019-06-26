@@ -1,5 +1,8 @@
 class Counter extends React.Component {
 
+    // parseInt(num, base)
+    // check for NaN (isNaN)
+
     constructor(props) {
         super(props)
 
@@ -8,8 +11,27 @@ class Counter extends React.Component {
         this.reset = this.reset.bind(this);
 
         this.state = {
-            count: props.count
+            count: 0
         };
+    }
+
+    componentDidMount() {
+        try {
+            const stringCount = localStorage.getItem('count');
+            const count = parseInt(stringCount, 10);
+
+            if (!isNaN(count)) {
+                this.setState(() => ({ count: count }));
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    componentDidUpdate(_prevProps, prevState) {
+        if (prevState.count !== this.state.count) {
+            localStorage.setItem('count', this.state.count);
+        }        
     }
     
     increment() {
@@ -46,10 +68,6 @@ class Counter extends React.Component {
             </div>
         );
     }
-}
-
-Counter.defaultProps = {
-    count: 0
 }
 
 ReactDOM.render(<Counter/>, document.getElementById('app'));

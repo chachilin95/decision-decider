@@ -9,7 +9,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         
         this.state = {
-            options: props.options
+            options: []
         };
     }
 
@@ -26,8 +26,7 @@ class IndecisionApp extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        
+    componentDidUpdate(prevProps, prevState) {        
         if (prevState.options.length !== this.state.options.length) {            
             const json = JSON.stringify(this.state.options);
             localStorage.setItem('options', json);
@@ -87,10 +86,6 @@ class IndecisionApp extends React.Component {
         );
     }
 }
-
-IndecisionApp.defaultProps = {
-    options: []
-};
 
 const Header = (props) => {
     return (
@@ -172,7 +167,7 @@ class AddOption extends React.Component {
             e.target.elements.option.value = '';
         }
     }    
-    
+
     render() {
         return (
             <div>
