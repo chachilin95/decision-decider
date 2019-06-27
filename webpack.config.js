@@ -8,11 +8,21 @@ module.exports = {
     },
     mode: 'development',
     module: {
-        rules: [{
-            loader: 'babel-loader',
-            test: /\.js$/, // matches all *.js files
-            exclude: /node_modules/ //do this to prevent trying to build everything inside of this
-        }]
+        rules: [
+            {
+                loader: 'babel-loader',
+                test: /\.js$/, // matches all *.js files
+                exclude: /node_modules/ //do this to prevent trying to build everything inside of this
+            },
+            {
+                test: /\.scss$/, // matches all *.css files
+                use: [ // allows us to use multiple loaders
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            }
+        ]
     },
     devtool: 'cheap-module-eval-source-map',
     devServer: {
