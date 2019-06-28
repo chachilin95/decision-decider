@@ -15,7 +15,7 @@ module.exports = {
                 exclude: /node_modules/ //do this to prevent trying to build everything inside of this
             },
             {
-                test: /\.scss$/, // matches all *.css files
+                test: /\.s?css$/, // matches all *.css & *.scss files
                 use: [ // allows us to use multiple loaders
                     'style-loader',
                     'css-loader',
