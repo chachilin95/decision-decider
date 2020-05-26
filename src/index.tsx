@@ -1,4 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<div>Hello World</div>, document.getElementById('root'));
+import IndecisionApp from './components/App';
+
+ReactDOM.render(<IndecisionApp/>, document.getElementById('root'));
