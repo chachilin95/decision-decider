@@ -4,6 +4,7 @@ import storageUtilities from './localStorage';
 
 // components
 import AddOption from '../AddOption';
+import OptionsList from '../OptionsList';
 
 const App = () => {
     
@@ -21,11 +22,12 @@ const App = () => {
         updateOptions(newState);
     };
 
-    const deleteOptionHandler = (id: number) => updateOptions(options.filter((option, index) => {
-        return (id === index) ? option : undefined;
-    }));
-
-    const deleteAllOptionsHandler = () => updateOptions([]);
+    const OptionsListHandlers = {
+        deleteOption: (id: number) => updateOptions(options.filter((option, index) => {
+            return (id !== index) ? option : undefined;
+        })),
+        deleteAllOptions: () => updateOptions([])
+    };
 
     // get saved options on startup
     useEffect(() => {
@@ -44,6 +46,7 @@ const App = () => {
     return (
         <div>
             App goes here
+            <OptionsList options={options} handlers={OptionsListHandlers}/>
             <AddOption addOptionHandler={(newOption: string) => addNewOptionHandler(newOption)}/>
         </div>
     );
