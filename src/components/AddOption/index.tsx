@@ -10,6 +10,7 @@ const AddOption = ({ addOptionHandler }: Props) => {
 
     const handleOnSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
+        e.target.reset(); // clear textbox
 
         const newOption = option.trim();
         addOptionHandler(newOption);
