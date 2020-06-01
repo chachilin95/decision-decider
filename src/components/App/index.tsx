@@ -5,18 +5,19 @@ import storageUtilities from './localStorage';
 // components
 import AddOption from '../AddOption';
 import OptionsList from '../OptionsList';
+import Action from '../Action';
 
 const App = () => {
     
     const [options, updateOptions] = useState<string[]>([]);
     const [selectedOption, updateSelectedOption] = useState(-1);
 
-    const selectOptionHandler = () => {
+    const selectOption = () => {
         const selection = Math.floor(Math.random()) % options.length;
         updateSelectedOption(selection);
-    }
+    };
 
-    const addNewOptionHandler = (newOption: string) => {
+    const addNewOption = (newOption: string) => {
         const currentState = options.slice();
         const newState = currentState.concat(newOption);
         updateOptions(newState);
@@ -46,8 +47,9 @@ const App = () => {
     return (
         <div>
             App goes here
+            <Action hasOptions={!!options} handlers={{ selectOption }}/>
             <OptionsList options={options} handlers={OptionsListHandlers}/>
-            <AddOption addOptionHandler={(newOption: string) => addNewOptionHandler(newOption)}/>
+            <AddOption addOptionHandler={(newOption: string) => addNewOption(newOption)}/>
         </div>
     );
 };
